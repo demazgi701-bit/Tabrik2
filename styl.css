@@ -1,0 +1,715 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100dvh;
+    font-family: Georgia, "Times New Roman", serif;
+    background: radial-gradient(
+        ellipse at center,
+        #b82c46,
+        #650b1d 55%,
+        #190208
+    );
+    color: #f8dfad;
+    overflow: hidden;
+}
+
+body.green {
+    background: radial-gradient(
+        ellipse at center,
+        #4c9874,
+        #174c34 60%,
+        #041b10
+    );
+}
+
+.scene {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    transition: opacity 1.5s, transform 1.5s;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(.92);
+}
+
+/* KITOB */
+
+.book {
+    position: relative;
+    width: min(43vw, 390px);
+    height: min(570px, 75dvh);
+    perspective: 2400px;
+    transform-style: preserve-3d;
+    transition: transform 2s ease-in-out;
+    filter: drop-shadow(10px 20px 15px #0006);
+}
+
+.book.open {
+    transform: translateX(50%);
+}
+
+.base {
+    position: absolute;
+    inset: 0;
+    border: 6px solid #50250f;
+    border-radius: 4px 12px 12px 4px;
+    background: radial-gradient(
+        ellipse,
+        #f9eac4,
+        #d8bd86
+    );
+    box-shadow: inset 0 0 35px #6c411855;
+    color: #77502b;
+}
+
+.left-base {
+    right: 100%;
+    left: -100%;
+    border-radius: 12px 3px 3px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.book.open .left-base {
+    opacity: 1;
+}
+
+.left-base span {
+    font-size: 45px;
+}
+
+.right-base {
+    z-index: 0;
+}
+
+/* QADIMIY MUQOVA */
+
+.cover,
+.sheet {
+    position: absolute;
+    inset: 0;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 1.8s cubic-bezier(.4,0,.2,1);
+}
+
+.cover {
+    z-index: 100;
+    cursor: pointer;
+}
+
+.cover-front,
+.cover-back,
+.front,
+.back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    border-radius: 3px 12px 12px 3px;
+}
+
+.cover-front {
+    padding: clamp(9px, 2vw, 20px);
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #ffffff04 0 2px,
+            transparent 2px 6px
+        ),
+        linear-gradient(
+            90deg,
+            #241006,
+            #6e3c1c 8%,
+            #3b170b 13%,
+            #75401e 65%,
+            #331509
+        );
+    border: 3px solid #a77a3b;
+    box-shadow:
+        inset 0 0 45px #000b,
+        5px 7px 0 #41240e,
+        7px 10px 0 #c3a477;
+}
+
+.gold-frame {
+    height: 100%;
+    border: 5px double #cba259;
+    outline: 1px solid #8f642f;
+    outline-offset: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.gold-frame h1 {
+    font-size: clamp(23px, 6vw, 50px);
+    font-weight: normal;
+    color: #e8c680;
+    text-shadow: 2px 3px 5px #000;
+}
+
+.gold-frame small,
+.gold-frame p {
+    font-size: clamp(10px, 2vw, 15px);
+    line-height: 1.7;
+}
+
+.cover-heart {
+    font-size: clamp(35px, 8vw, 80px);
+    color: #dcb36b;
+}
+
+.cover-back {
+    transform: rotateY(180deg);
+    background: radial-gradient(
+        #f8e6b8,
+        #c7a46a
+    );
+    border: 6px double #79502a;
+    color: #67421f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    text-align: center;
+    padding: 15px;
+}
+
+/* QOG'OZ SAHIFALARI */
+
+.front,
+.back {
+    padding: clamp(10px, 2.4vw, 25px);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #79501a05 0px,
+            transparent 1px 4px
+        ),
+        radial-gradient(
+            ellipse,
+            #fff2d0,
+            #e7d1a1 75%,
+            #b6945d
+        );
+    color: #50351e;
+    box-shadow: inset 0 0 25px #80562b66;
+    border: 1px solid #aa8952;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.front {
+    border-right: 5px double #b29a6a;
+}
+
+.back {
+    transform: rotateY(180deg);
+    border-left: 5px double #b29a6a;
+    justify-content: center;
+    text-align: center;
+}
+
+.flipped {
+    transform: rotateY(-180deg);
+}
+
+.ornament {
+    color: #af8544;
+    font-size: clamp(22px, 5vw, 40px);
+}
+
+.front h2 {
+    font-size: clamp(15px, 3vw, 25px);
+    text-align: center;
+    margin: 8px 0 12px;
+    font-weight: normal;
+}
+
+.letter {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow-y: auto;
+    font-size: clamp(12px, 2.5vw, 16px);
+    line-height: 1.75;
+    scrollbar-width: thin;
+    scrollbar-color: #ab854b transparent;
+    padding-right: 5px;
+}
+
+.letter p {
+    margin-bottom: 16px;
+}
+
+.page-number {
+    font-size: 12px;
+    padding-top: 8px;
+    color: #967341;
+}
+
+.quote {
+    font-size: clamp(13px, 3vw, 23px);
+    font-style: italic;
+    line-height: 1.8;
+    padding: 10px;
+}
+
+.navigation {
+    margin-top: 25px;
+    text-align: center;
+}
+
+#counter {
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+button {
+    border: 1px solid #cda96c;
+    border-radius: 35px;
+    padding: 13px 25px;
+    font: 16px Georgia, serif;
+    background: linear-gradient(
+        135deg,
+        #fff0c8,
+        #c6a061
+    );
+    color: #50331c;
+    cursor: pointer;
+    box-shadow: 0 5px 20px #0004;
+    transition: transform .25s;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
+/* KECHIRIM SAHIFASI */
+
+.message-box {
+    width: min(460px, 92vw);
+    max-height: 95dvh;
+    overflow-y: auto;
+    text-align: center;
+    padding: 30px 20px;
+    background: #ffffff0d;
+    border: 1px solid #e3c89177;
+    border-radius: 25px;
+    box-shadow: 0 25px 70px #0005;
+    backdrop-filter: blur(12px);
+}
+
+.message-box h1 {
+    font-size: clamp(27px, 6vw, 42px);
+    font-weight: normal;
+    margin: 15px 0;
+}
+
+.message-box p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+.heart {
+    font-size: 85px;
+    color: #f5dfb5;
+    animation: heartbeat 1.8s infinite;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+#yes {
+    background: #f3ddb2;
+    color: #24583c;
+}
+
+#no {
+    background: #ffffff18;
+    color: #fff6df;
+}
+
+.play-area {
+    position: relative;
+    height: 110px;
+    overflow: hidden;
+}
+
+#play {
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #ffe8bc;
+    background: transparent;
+    transition: left .35s, top .35s;
+}
+
+/* SEHRLI ZARRALAR */
+
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    bottom: -30px;
+    color: #ffe0a0;
+    text-shadow: 0 0 12px #ffe9a8;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25%, 65% {
+        opacity: .8;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-115vh) rotate(180deg);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.13);
+    }
+}
+
+@media (max-width: 600px) {
+    .book {
+        width: 45vw;
+        height: 69dvh;
+    }
+
+    .front, .back {
+        padding: 10px;
+    }
+
+    .letter {
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .navigation {
+        margin-top: 18px;
+    }
+
+    .cover-back h2 {
+        font-size: 17px;
+    }
+
+    .cover-back p {
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cover, .sheet, .book {
+        transition-duration: .1s;
+    }
+
+    .particle, .heart {
+        animation: none;
+    }
+}
+
+/* YANGI YAKUNIY DIZAYN */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        #438c65,
+        #16452d 55%,
+        #03170e
+    );
+    opacity: 0;
+    transition: opacity 2s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body.green::before {
+    opacity: 1;
+}
+
+#particles {
+    z-index: 1;
+}
+
+.scene {
+    z-index: 2;
+}
+
+#questionScene .message-box,
+#finalScene .message-box {
+    position: relative;
+    width: min(470px, 92vw);
+    padding: 40px 25px;
+    background: linear-gradient(
+        145deg,
+        #ffffff18,
+        #ffffff05
+    );
+    border: 2px solid #d9bd8170;
+    border-radius: 30px;
+    box-shadow:
+        0 0 50px #ffe4a51a,
+        0 25px 80px #0006;
+}
+
+#questionScene:not(.hidden) .message-box,
+#finalScene:not(.hidden) .message-box {
+    animation: beautifulOpen 1.5s ease both;
+}
+
+.message-box h1 {
+    color: #ffe5ad;
+    text-shadow: 0 0 25px #ffd68c55;
+}
+
+.message-box p {
+    color: #fff0d6;
+    line-height: 1.9;
+}
+
+.buttons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    min-height: 100px;
+}
+
+#yes, #no {
+    min-width: 110px;
+    padding: 15px 25px;
+    font-size: 19px;
+    border-radius: 35px;
+}
+
+#yes {
+    background: linear-gradient(
+        135deg,
+        #fff0ba,
+        #cea45c
+    );
+    color: #19472d;
+    box-shadow: 0 0 25px #ffe3a44d;
+}
+
+#no {
+    background: #ffffff15;
+    color: #fff0d6;
+    border: 1px solid #ffe3a46b;
+}
+
+.heart {
+    font-size: 100px;
+    color: #ffe3aa;
+    filter: drop-shadow(0 0 20px #ffd58b88);
+}
+
+#finalTitle {
+    animation: beautifulOpen 1.5s ease both;
+}
+
+#finalText {
+    animation: beautifulOpen 2s .3s ease both;
+}
+
+@keyframes beautifulOpen {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.celebration-heart {
+    position: fixed;
+    bottom: -60px;
+    z-index: 5;
+    pointer-events: none;
+    animation: celebration 5s ease-out forwards;
+}
+
+@keyframes celebration {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(.5);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-120vh) rotate(40deg);
+    }
+}
+
+/* OXIRGI XATOLARNI TUZATISH */
+
+html, body {
+    width: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+#questionScene,
+#finalScene {
+    overflow: hidden;
+    padding: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#questionScene .message-box,
+#finalScene .message-box {
+    width: min(460px, 92vw);
+    max-height: 90dvh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+
+    padding: 35px 25px;
+    border-radius: 30px;
+}
+
+.message-box::-webkit-scrollbar {
+    display: none;
+}
+
+.heart {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 10px;
+
+    font-size: 90px;
+    line-height: 1.2;
+
+    pointer-events: none;
+    user-select: none;
+
+    color: #ffdda0;
+
+    filter: drop-shadow(
+        0 0 15px #ffd17a88
+    );
+}
+
+.message-box .ornament {
+    display: block;
+    margin: 5px auto;
+    pointer-events: none;
+}
+
+.message-box h1 {
+    font-weight: normal;
+    font-size: clamp(28px, 6vw, 40px);
+    margin: 20px 0;
+}
+
+.message-box p {
+    font-size: 17px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+    min-height: 65px;
+
+    margin: 25px 0 5px;
+}
+
+#yes, #no {
+    min-width: 105px;
+    padding: 14px 25px;
+
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+@media (max-width: 480px) {
+
+    #questionScene .message-box,
+    #finalScene .message-box {
+        padding: 25px 18px;
+    }
+
+    .heart {
+        font-size: 70px;
+    }
+
+    .message-box p {
+        font-size: 15px;
+    }
+
+    .buttons {
+        gap: 12px;
+    }
+}

@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening qalbim</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+
+<div id="particles"></div>
+
+<section id="bookScene" class="scene">
+    <div class="book" id="book">
+
+        <div class="base left-base">
+            <span>❦</span>
+            <h2>Mening qalbim</h2>
+            <p>Aytilmagan so'zlar...</p>
+        </div>
+
+        <div class="base right-base"></div>
+
+        <div id="pages"></div>
+
+        <div class="cover" id="cover">
+            <div class="cover-front">
+                <div class="gold-frame">
+                    <span class="ornament">❦</span>
+                    <small>Qalbimdan bir parcha</small>
+                    <h1>Mening<br>qalbim</h1>
+                    <div class="cover-heart">♡</div>
+                    <p>Beshta sahifa.<br>Bir olam tuyg'u.</p>
+                    <span class="ornament">❦</span>
+                </div>
+            </div>
+
+            <div class="cover-back">
+                <span class="ornament">❦</span>
+                <h2>Muqaddima</h2>
+                <p>Ba'zi so'zlarni til emas, qalb aytadi.</p>
+                <div class="cover-heart">♡</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="navigation">
+        <p id="counter">Qalbimdagi kichik bir hikoya</p>
+        <button id="next">Kitobni ochish ❦</button>
+    </div>
+</section>
+
+<section id="questionScene" class="scene hidden">
+    <div class="message-box">
+        <div class="heart">♡</div>
+        <span class="ornament">❦</span>
+
+        <h1>Meni kechira qol...</h1>
+
+        <p>
+            Agar biror so'zim yoki harakatim bilan
+            seni ranjitgan bo'lsam,
+            chin qalbimdan uzr so'rayman.
+        </p>
+
+        <div class="buttons">
+            <button id="yes">Ha ♡</button>
+            <button id="no">Yo'q</button>
+        </div>
+
+        <div class="play-area">
+            <button id="play">♡ Tutib ko'r</button>
+        </div>
+    </div>
+</section>
+
+<section id="finalScene" class="scene hidden">
+    <div class="message-box">
+        <div class="heart">♡</div>
+        <h1 id="finalTitle"></h1>
+        <p id="finalText"></p>
+        <div class="ornament">❦</div>
+        <button onclick="location.reload()">
+            Qayta o'qish
+        </button>
+    </div>
+</section>
+
+<script src="sasas.js"></script>
+</body>
+</html>
